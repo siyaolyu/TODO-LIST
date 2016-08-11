@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="todoList" ng-controller="todoController">
+<head>
+	<meta charset="utf-8">
+	<title>TODO LIST</title>
+	<link rel="stylesheet" href="css/main.css">
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/ListController.js"></script>
+</head>
+
+<body ng-init="tasks=[{name:'task1',status:'active'},{name:'task2',status:'active'},{name:'task3',status:'completed'}]">
+	<h2>TODO LIST</h2>
+	<input type="text" ng-model="filterWord" size="30" placeholder="Type here to filter todo items" >
+	<p>View: [ <button ng-click="viewAll()">All</button>   
+				<button ng-click="viewActive()">Active</button>
+				<button ng-click="viewCompleted()">Completed</button> ]</p>
+	<ul ng-repeat="x in tasks | filter:filterWord" ng-show="show(tasks.indexOf(x))">
+		<span class="status-{{x.status}}">{{x.name}}</span><button ng-click="done(tasks.indexOf(x))">Done</button><button ng-click="delete(tasks.indexOf(x))">Delete</button>
+	</ul>
+	<input type="text" ng-model="new" size="30" placeholder="add new todo items here" required><button ng-click="add(new)">add</button>
+</body>
+</html>
